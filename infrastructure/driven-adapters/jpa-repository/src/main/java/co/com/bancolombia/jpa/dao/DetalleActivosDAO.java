@@ -15,14 +15,16 @@ import java.util.Map;
 public class DetalleActivosDAO {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id_detalle_activo;
+    @Column(name = "id_detalle_activo")
+    private Long idDetalleActivo;
 
-    private Long id_activo;
+    @Column(name = "id_activo")
+    private Long idActivo;
 
 //    @JdbcTypeCode(SqlTypes.JSON)
 //    @Column(columnDefinition = "jsonb")
-//    private List<Map<String, Object>> datos_dinamicos;
+//    private List<Map<String, Object>> datosDinamicos;
 
-    @Column(columnDefinition = "JSON")
-    private String datos_dinamicos;
+    @Column(name = "datos_dinamicos", columnDefinition = "JSON")
+    private String datosDinamicos;
 }

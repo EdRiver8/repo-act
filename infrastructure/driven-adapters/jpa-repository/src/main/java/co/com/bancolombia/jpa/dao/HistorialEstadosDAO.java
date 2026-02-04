@@ -9,16 +9,20 @@ import java.time.LocalDateTime;
 @Table(name = "historial_estados", schema = "public")
 @Getter @Setter
 @AllArgsConstructor @NoArgsConstructor @Builder
-
 public class HistorialEstadosDAO {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id_historial_estado;
+    @Column(name = "id_historial_estado")
+    private Long idHistorialEstado;
 
-    private Long id_activo;
-    private Integer id_estado;
+    @Column(name = "id_activo")
+    private Long idActivo;
+    
+    @Column(name = "id_estado")
+    private Integer idEstado;
 
     private LocalDateTime fecha;
 
-    private String usuario_responsable;
+    @Column(name = "usuario_responsable")
+    private String usuarioResponsable;
 }

@@ -1,5 +1,6 @@
 package co.com.bancolombia.model.activos;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Builder;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -27,8 +28,6 @@ public class Activos {
   private String ciudadUbicacion;
   private String marca;
   private Integer idEstado;
-//  private List<Map<String, Object>> definicionEsquema;
-//  private List<Map<String, Object>> imagenesS3;
-  private String definicion_esquema;
-  private String imagenes_s3;
+  private Object definicionEsquema;
+  private Object imagenesS3;
 }

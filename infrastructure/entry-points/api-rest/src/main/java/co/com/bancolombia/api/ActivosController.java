@@ -33,17 +33,28 @@ public class ActivosController {
     return ResponseEntity.ok(result);
   }
 
+//  @GetMapping("/modelo")
+//  public ResponseEntity<List<?>> getByModelo(@RequestBody JsonNode modelo) {
+//    String jsonFiltro = modelo.toString();
+//    log.info("Modelo recibido: {}", jsonFiltro);
+//    List<?> result = activosUseCase.buscarPorModelo(jsonFiltro);
+//    return ResponseEntity.ok(result);
+//  }
+
   @GetMapping("/modelo")
-  public ResponseEntity<List<?>> getByModelo(@RequestBody JsonNode modelo) {
-    String jsonFiltro = modelo.toString();
-    log.info("Modelo recibido: {}", jsonFiltro);
-    List<?> result = activosUseCase.buscarPorModelo(jsonFiltro);
+  public ResponseEntity<List<?>> getByModelo(@RequestBody String modelo) {
+    log.info("Modelo recibido: {}", modelo);
+    List<?> result = activosUseCase.buscarPorModelo(modelo);
     return ResponseEntity.ok(result);
   }
 
   @PostMapping("/save")
   public ResponseEntity<String> save(@RequestBody Activos activo) {
     log.info("Guardando activo: {}", activo);
+    // Asignar estado por defecto si no viene en la petición
+    if (activo.getIdEstado() == null) {
+      activo.setIdEstado(1); // Estado por defecto: Activo
+    }
     activosUseCase.guardarActivo(activo);
     return ResponseEntity.status(HttpStatus.CREATED).body("guardado");
   }
