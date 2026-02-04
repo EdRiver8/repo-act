@@ -1,6 +1,5 @@
 package co.com.bancolombia.model.activos;
 
-import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Builder;
 import lombok.AllArgsConstructor;
 import lombok.Getter;

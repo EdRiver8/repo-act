@@ -17,6 +17,5 @@ import java.util.Map;
 public class DetallesActivos {
   private Long idDetalleActivo;
   private Long idActivo;
-//  private List<Map<String, Object>> datosDinamicos;
-  private String datosDinamicos;
+  private Object datosDinamicos;
 }
