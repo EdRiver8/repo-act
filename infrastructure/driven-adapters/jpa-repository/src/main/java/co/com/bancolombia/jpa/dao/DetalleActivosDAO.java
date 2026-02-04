@@ -19,7 +19,10 @@ public class DetalleActivosDAO {
 
     private Long id_activo;
 
-    @JdbcTypeCode(SqlTypes.JSON)
-    @Column(columnDefinition = "jsonb")
-    private List<Map<String, Object>> datos_dinamicos;
+//    @JdbcTypeCode(SqlTypes.JSON)
+//    @Column(columnDefinition = "jsonb")
+//    private List<Map<String, Object>> datos_dinamicos;
+
+    @Column(columnDefinition = "JSON")
+    private String datos_dinamicos;
 }

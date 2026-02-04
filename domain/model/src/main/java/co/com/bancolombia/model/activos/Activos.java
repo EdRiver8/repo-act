@@ -27,6 +27,8 @@ public class Activos {
   private String ciudadUbicacion;
   private String marca;
   private Integer idEstado;
-  private List<Map<String, Object>> definicionEsquema;
-  private List<Map<String, Object>> imagenesS3;
+//  private List<Map<String, Object>> definicionEsquema;
+//  private List<Map<String, Object>> imagenesS3;
+  private String definicion_esquema;
+  private String imagenes_s3;
 }

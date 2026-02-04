@@ -33,11 +33,17 @@ public class ActivoDAO {
     @Column(nullable = false)
     private Integer id_estado;
 
-    @JdbcTypeCode(SqlTypes.JSON)
-    @Column(columnDefinition = "jsonb")
-    private List<Map<String, Object>> definicion_esquema;
+//    @JdbcTypeCode(SqlTypes.JSON)
+//    @Column(columnDefinition = "jsonb")
+//    private List<Map<String, Object>> definicion_esquema;
+//
+//    @JdbcTypeCode(SqlTypes.JSON)
+//    @Column(columnDefinition = "jsonb")
+//    private List<Map<String, Object>> imagenes_s3;
 
-    @JdbcTypeCode(SqlTypes.JSON)
-    @Column(columnDefinition = "jsonb")
-    private List<Map<String, Object>> imagenes_s3;
+    @Column(columnDefinition = "JSON")
+    private String definicion_esquema;
+
+    @Column(columnDefinition = "JSON")
+    private String imagenes_s3;
 }

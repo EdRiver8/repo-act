@@ -27,7 +27,7 @@ public class ActivosController {
   private final DetalleActivosUseCase detalleActivosUseCase;
 
   @GetMapping("/tipo")
-  public ResponseEntity<List<Activos>> getByTipoActivo(@RequestParam String tipo_activo) {
+  public ResponseEntity<List<Activos>> getByTipoActivo(@RequestParam("tipo_activo") String tipo_activo) {
     log.info("Tipo Activo recibido: {}", tipo_activo);
     List<Activos> result = activosUseCase.buscarPorTipoActivo(tipo_activo);
     return ResponseEntity.ok(result);
