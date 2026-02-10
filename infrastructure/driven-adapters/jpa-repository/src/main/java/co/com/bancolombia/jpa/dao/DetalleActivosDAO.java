@@ -25,6 +25,8 @@ public class DetalleActivosDAO {
     private Long idActivo;
 
     // Campo JSONB para PostgreSQL
-    @Column(name = "datos_dinamicos", columnDefinition = "jsonb")
+//    @Column(name = "datos_dinamicos", columnDefinition = "jsonb")
+    @JdbcTypeCode(SqlTypes.JSON)
+    @Column(name = "datos_dinamicos")
     private String datosDinamicos;
 }

@@ -17,6 +17,7 @@ import java.util.Map;
 public class Activos {
   private Long idActivo;
   private String tipoActivo;
+  private Integer idTipoActivo;
   private Integer grupo;
   private Integer subgrupo;
   private Integer tipoProducto;
@@ -27,8 +28,8 @@ public class Activos {
   private String ciudadUbicacion;
   private String marca;
   private Integer idEstado;
-  //  private List<Map<String, Object>> definicionEsquema;
-//  private List<Map<String, Object>> imagenesS3;
+  // private List<Map<String, Object>> definicionEsquema;
+  // private List<Map<String, Object>> imagenesS3;
   private Object definicionEsquema;
   private Object imagenesS3;
 }

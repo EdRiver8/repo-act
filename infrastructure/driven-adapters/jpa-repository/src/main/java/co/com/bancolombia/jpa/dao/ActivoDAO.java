@@ -2,6 +2,8 @@ package co.com.bancolombia.jpa.dao;
 
 import jakarta.persistence.*;
 import lombok.*;
+import org.hibernate.annotations.JdbcTypeCode;
+import org.hibernate.type.SqlTypes;
 
 @Entity
 @Table(name = "activos", schema = "public")
@@ -18,6 +20,9 @@ public class ActivoDAO {
 
     @Column(name = "tipo_activo", nullable = false)
     private String tipoActivo;
+
+    @Column(name = "id_tipo_activo", nullable = false)
+    private Integer idTipoActivo;
 
     private Integer grupo;
     private Integer subgrupo;
@@ -42,10 +47,11 @@ public class ActivoDAO {
     @Column(name = "id_estado", nullable = false)
     private Integer idEstado;
 
-    // Campos JSONB para PostgreSQL
-    @Column(name = "definicion_esquema", columnDefinition = "jsonb")
+    @JdbcTypeCode(SqlTypes.JSON)
+    @Column(name = "definicion_esquema")
     private String definicionEsquema;
 
-    @Column(name = "imagenes_s3", columnDefinition = "jsonb")
+    @JdbcTypeCode(SqlTypes.JSON)
+    @Column(name = "imagenes_s3")
     private String imagenesS3;
 }
