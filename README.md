@@ -2,9 +2,9 @@
 
 ## Antes de Iniciar
 
-Empezaremos por explicar los diferentes componentes del proyectos y partiremos de los componentes externos, continuando con los componentes core de negocio (dominio) y por último el inicio y configuración de la aplicación.
+Empezaremos por explicar los diferentes componentes del proyectos y partiremos de los componentes externos, continuando con los componentes core de negocio (dominio) y por ï¿½ltimo el inicio y configuraciï¿½n de la aplicaciï¿½n.
 
-Lee el artículo [Clean Architecture — Aislando los detalles](https://medium.com/bancolombia-tech/clean-architecture-aislando-los-detalles-4f9530f35d7a)
+Lee el artï¿½culo [Clean Architecture ï¿½ Aislando los detalles](https://medium.com/bancolombia-tech/clean-architecture-aislando-los-detalles-4f9530f35d7a)
 
 # Arquitectura
 
@@ -12,11 +12,11 @@ Lee el artículo [Clean Architecture — Aislando los detalles](https://medium.com/
 
 ## Domain
 
-Es el módulo más interno de la arquitectura, pertenece a la capa del dominio y encapsula la lógica y reglas del negocio mediante modelos y entidades del dominio.
+Es el mï¿½dulo mï¿½s interno de la arquitectura, pertenece a la capa del dominio y encapsula la lï¿½gica y reglas del negocio mediante modelos y entidades del dominio.
 
 ## Usecases
 
-Este módulo gradle perteneciente a la capa del dominio, implementa los casos de uso del sistema, define lógica de aplicación y reacciona a las invocaciones desde el módulo de entry points, orquestando los flujos hacia el módulo de entities.
+Este mï¿½dulo gradle perteneciente a la capa del dominio, implementa los casos de uso del sistema, define lï¿½gica de aplicaciï¿½n y reacciona a las invocaciones desde el mï¿½dulo de entry points, orquestando los flujos hacia el mï¿½dulo de entities.
 
 ## Infrastructure
 
@@ -24,9 +24,9 @@ Este módulo gradle perteneciente a la capa del dominio, implementa los casos de 
 
 En el apartado de helpers tendremos utilidades generales para los Driven Adapters y Entry Points.
 
-Estas utilidades no están arraigadas a objetos concretos, se realiza el uso de generics para modelar comportamientos
-genéricos de los diferentes objetos de persistencia que puedan existir, este tipo de implementaciones se realizan
-basadas en el patrón de diseño [Unit of Work y Repository](https://medium.com/@krzychukosobudzki/repository-design-pattern-bc490b256006)
+Estas utilidades no estï¿½n arraigadas a objetos concretos, se realiza el uso de generics para modelar comportamientos
+genï¿½ricos de los diferentes objetos de persistencia que puedan existir, este tipo de implementaciones se realizan
+basadas en el patrï¿½n de diseï¿½o [Unit of Work y Repository](https://medium.com/@krzychukosobudzki/repository-design-pattern-bc490b256006)
 
 Estas clases no puede existir solas y debe heredarse su compartimiento en los **Driven Adapters**
 
@@ -38,10 +38,81 @@ interactuar.
 
 ### Entry Points
 
-Los entry points representan los puntos de entrada de la aplicación o el inicio de los flujos de negocio.
+Los entry points representan los puntos de entrada de la aplicaciï¿½n o el inicio de los flujos de negocio.
 
 ## Application
 
-Este módulo es el más externo de la arquitectura, es el encargado de ensamblar los distintos módulos, resolver las dependencias y crear los beans de los casos de use (UseCases) de forma automática, inyectando en éstos instancias concretas de las dependencias declaradas. Además inicia la aplicación (es el único módulo del proyecto donde encontraremos la función “public static void main(String[] args)”.
+Este mï¿½dulo es el mï¿½s externo de la arquitectura, es el encargado de ensamblar los distintos mï¿½dulos, resolver las dependencias y crear los beans de los casos de use (UseCases) de forma automï¿½tica, inyectando en ï¿½stos instancias concretas de las dependencias declaradas. Ademï¿½s inicia la aplicaciï¿½n (es el ï¿½nico mï¿½dulo del proyecto donde encontraremos la funciï¿½n ï¿½public static void main(String[] args)ï¿½.
 
 **Los beans de los casos de uso se disponibilizan automaticamente gracias a un '@ComponentScan' ubicado en esta capa.**
+
+---
+
+## Base de Datos - PostgreSQL
+
+Este proyecto utiliza **PostgreSQL** como base de datos principal. La configuraciÃ³n de H2 (base de datos en memoria) ha sido comentada.
+
+### ğŸš€ Inicio RÃ¡pido con Docker
+
+```bash
+# Iniciar PostgreSQL con Docker Compose
+docker-compose up -d postgres
+
+# Ver logs
+docker-compose logs -f postgres
+
+# Detener
+docker-compose stop
+```
+
+### ğŸ› ï¸ Script de GestiÃ³n (PowerShell)
+
+Un script de PowerShell estÃ¡ disponible para facilitar la gestiÃ³n:
+
+```powershell
+# Ver comandos disponibles
+.\db-manager.ps1 help
+
+# Iniciar base de datos
+.\db-manager.ps1 start
+
+# Ver estado
+.\db-manager.ps1 status
+
+# Conectar a PostgreSQL
+.\db-manager.ps1 connect
+```
+
+### ğŸ“Š ConfiguraciÃ³n de ConexiÃ³n
+
+La configuraciÃ³n se encuentra en `application.yaml`:
+
+```yaml
+spring:
+  datasource:
+    url: jdbc:postgresql://localhost:5432/repo_activo
+    username: postgres
+    password: postgres
+```
+
+### ğŸ“š DocumentaciÃ³n Adicional
+
+- [POSTGRESQL_SETUP.md](POSTGRESQL_SETUP.md) - GuÃ­a completa de configuraciÃ³n
+- [docker-compose.yml](docker-compose.yml) - ConfiguraciÃ³n de contenedores
+- PgAdmin disponible en: http://localhost:5050
+
+### ğŸ” CaracterÃ­sticas
+
+- **JSONB**: Campos `definicion_esquema`, `imagenes_s3` y `datos_dinamicos` usan JSONB para bÃºsquedas eficientes
+- **Ãndices GIN**: BÃºsquedas optimizadas en campos JSON
+- **Auto-increment**: Uso de `BIGSERIAL` en PostgreSQL
+
+### ğŸ§ª VerificaciÃ³n
+
+```bash
+# Compilar y ejecutar
+./gradlew bootRun
+
+# Verificar endpoint
+curl http://localhost:8080/ra/api/activos/tipo?tipo_activo=EQUIPO_COMPUTO
+```

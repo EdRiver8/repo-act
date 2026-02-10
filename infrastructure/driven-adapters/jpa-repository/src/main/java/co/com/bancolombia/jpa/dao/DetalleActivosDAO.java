@@ -10,8 +10,11 @@ import java.util.Map;
 
 @Entity
 @Table(name = "detalles_activos", schema = "public")
-@Getter @Setter
-@AllArgsConstructor @NoArgsConstructor @Builder
+@Getter
+@Setter
+@AllArgsConstructor
+@NoArgsConstructor
+@Builder
 public class DetalleActivosDAO {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -21,10 +24,7 @@ public class DetalleActivosDAO {
     @Column(name = "id_activo")
     private Long idActivo;
 
-//    @JdbcTypeCode(SqlTypes.JSON)
-//    @Column(columnDefinition = "jsonb")
-//    private List<Map<String, Object>> datosDinamicos;
-
-    @Column(name = "datos_dinamicos", columnDefinition = "JSON")
+    // Campo JSONB para PostgreSQL
+    @Column(name = "datos_dinamicos", columnDefinition = "jsonb")
     private String datosDinamicos;
 }
